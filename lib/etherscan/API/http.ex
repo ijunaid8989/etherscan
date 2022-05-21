@@ -1,4 +1,4 @@
-defmodule Etherscan.API.Finch do
+defmodule Etherscan.API.HTTP do
   @spec post(
           binary | URI.t(),
           list(),

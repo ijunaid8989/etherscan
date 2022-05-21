@@ -12,6 +12,12 @@ defmodule Etherscan.Application do
       EtherscanWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Etherscan.PubSub},
+      {Finch,
+       name: Etherscan.API.Finch,
+       pools: %{
+         slack_api() => [size: 32, count: 8],
+         blocknative_api() => [size: 32, count: 8]
+       }},
       # Start the Endpoint (http/https)
       EtherscanWeb.Endpoint
       # Start a worker by calling: Etherscan.Worker.start_link(arg)
@@ -31,4 +37,8 @@ defmodule Etherscan.Application do
     EtherscanWeb.Endpoint.config_change(changed, removed)
     :ok
   end
+
+  defp slack_api(), do: Application.get_env(:etherscan, :slack_api)
+
+  defp blocknative_api(), do: Application.get_env(:etherscan, :blocknative_api)
 end

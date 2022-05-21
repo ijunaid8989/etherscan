@@ -22,6 +22,12 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :etherscan,
+  blocknative_api: "https://api.blocknative.com/transaction",
+  blocknative_key: System.get_env("BLOCKNATIVE_KEY"),
+  slack_api: "https://hooks.slack.com/services/T03GBSVGA0M/B03H4HE40KA",
+  slack_key: System.get_env("SLACK_KEY")
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"

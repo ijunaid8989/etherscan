@@ -1,4 +1,18 @@
 defmodule Etherscan.Queue.Worker do
+  @moduledoc """
+  Module is Queue bases worked, using erlang's `:queue`. Worker starts within an inner initial state map , goes to `handle_continue/2` to set a new empty `:queue.from_list/1`.
+
+  It solves 2 problems, one to send requets to blocknative using self() call, every 10_000 timer, and add new hashes to the queue.
+
+  ## Example
+    iex(1)> Etherscan.Queue.Worker.start_link([])
+    [info] Initiated Queue with clock.
+    {:ok, #PID<0.370.0>}
+
+    iex(2)> Etherscan.Queue.Worker.add_to_queue(["0x6a986a889a663cf6cec17798b51bb9becd9a0c9ec56a124d8128216f29df9d35"])
+    :ok
+  """
+
   use GenServer
 
   require Logger

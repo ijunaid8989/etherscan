@@ -12,8 +12,9 @@ defmodule Etherscan.Application do
       EtherscanWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Etherscan.PubSub},
+      Etherscan.Queue.Worker,
       {Finch,
-       name: Etherscan.API.Finch,
+       name: Etherscan.API.HTTP,
        pools: %{
          slack_api() => [size: 32, count: 8],
          blocknative_api() => [size: 32, count: 8]
